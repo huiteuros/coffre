@@ -1,0 +1,11 @@
+# Réglages locaux de l'API (mot de passe de la base…) : voir api/config.local.example.php
+api/config.local.php
+
+# Réglages personnels de Claude Code
+.claude/settings.local.json
+
+# Dépendances et fichiers système
+node_modules/
+.DS_Store
+Thumbs.db
+desktop.ini

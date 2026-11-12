@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "chambre-forte",
+      "runtimeExecutable": "C:\\wamp64\\bin\\php\\php8.3.6\\php.exe",
+      "runtimeArgs": ["-S", "localhost:8124"],
+      "port": 8124,
+      "autoPort": false
+    }
+  ]
+}

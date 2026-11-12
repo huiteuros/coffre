@@ -1,0 +1,8 @@
+{
+  "name": "chambre-forte",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "simulate": "node tools/simulate.mjs"
+  }
+}
