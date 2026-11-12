@@ -1,0 +1,11 @@
+# API : transmet l'en-tête Authorization à PHP (souvent retiré par Apache + PHP-FPM sur les hébergements mutualisés)
+RewriteEngine On
+# Garde aussi les règles du dossier parent (redirection HTTPS…)
+RewriteOptions Inherit
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Fichiers internes : réglages et bibliothèque, jamais appelés directement
+<FilesMatch "^(config.*|lib)\.php$">
+  Require all denied
+</FilesMatch>

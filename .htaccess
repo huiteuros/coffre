@@ -1,0 +1,12 @@
+# Chambre Forte : règles Apache pour l'hébergement (OVH Web Cloud)
+
+RewriteEngine On
+
+# Tout en HTTPS : les mots de passe et jetons ne doivent jamais circuler en clair
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Fichiers du dépôt qui n'ont rien à faire en ligne : schéma SQL, outils, réglages, fichiers cachés
+RewriteRule ^(db|tools|\.claude|node_modules)(/|$) - [F,L]
+RewriteRule ^(README\.md|package\.json)$ - [F,L]
+RewriteRule (^|/)\.(?!well-known/) - [F,L]

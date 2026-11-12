@@ -1,9 +1,6 @@
 -- Chambre Forte : schéma MySQL 8 / MariaDB 10.5+
--- Installation : mysql -u root -p < db/schema.sql
-
-CREATE DATABASE IF NOT EXISTS chambre_forte
-  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE chambre_forte;
+-- À importer dans une base existante (en local : chambre_forte ; chez OVH : la base créée dans l'espace client,
+-- via phpMyAdmin > Importer). Le script ne crée pas la base : les hébergements mutualisés l'interdisent.
 
 -- Joueurs. La collation _ci rend le pseudo unique sans tenir compte de la casse.
 CREATE TABLE IF NOT EXISTS players (

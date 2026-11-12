@@ -22,6 +22,8 @@
 [hidden] { display: none !important; }
 html, body { min-height: 100%; }
 body {
+  margin: 0;
+  background-color: var(--bg);
   background:
     radial-gradient(1200px 600px at 30% -10%, #1d2429 0%, transparent 60%),
     repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 2px, transparent 2px 6px),
@@ -30,9 +32,13 @@ body {
   font: 500 15px/1.45 var(--f-body);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 16px 32px;
+  padding-top: max(16px, env(safe-area-inset-top, 0px));
+  padding-bottom: max(32px, env(safe-area-inset-bottom, 0px));
   -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
+html { background: var(--bg); }
 button { font: inherit; color: inherit; }
 button:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
 
@@ -254,6 +260,44 @@ kbd {
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 .toast.bad { border-color: var(--alarm); color: var(--alarm); }
+
+/* Téléphone : en-tête compact, porte plus petite (on peut faire défiler la page à côté),
+   établi juste sous le coffre, cavale en dernier, onglets toujours accessibles en haut */
+@media (max-width: 820px) {
+  .wrap, .grid { gap: 12px; }
+  .top { gap: 8px 12px; }
+  .brand span { display: none; }
+  .brand h1 { font-size: 30px; }
+  .wallet { gap: 6px; }
+  .chip { padding: 5px 9px; gap: 6px; }
+  .chip b { font-size: 16px; }
+  .icon-btn { padding: 5px 9px; }
+
+  .left { display: contents; }
+  .stage { order: 1; padding: 12px; gap: 10px; }
+  .bench { order: 2; }
+  .heist { order: 3; }
+  .doorwrap { width: min(70vw, 280px); }
+  .plate .no { font-size: 19px; }
+  .code span { font-size: 26px; }
+  #hint { font-size: 12.5px; }
+
+  .tabs {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0;
+    background: var(--bg); margin-inline: -4px; padding-inline: 4px;
+  }
+  .tab { justify-content: center; padding: 12px 2px; font-size: 15px; gap: 4px; min-width: 0; }
+  /* Pastilles réduites à un point quand il y a quelque chose à faire */
+  .tab .count { display: none; }
+  .tab .count.hot { display: inline-block; width: 7px; height: 7px; padding: 0; font-size: 0; border-radius: 50%; }
+  .item { padding: 10px 12px; }
+  .achs { max-height: none; }
+}
+@media (max-width: 820px) and (hover: none) {
+  /* Bande au-dessus des onglets collants, sous l'encoche */
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .door, .dialg, .wheel { transition: none; }
