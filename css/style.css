@@ -56,7 +56,6 @@ button:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
 .chip.lingot b { color: var(--ingot); }
 .icon-btn { background: var(--steel); border: 1px solid var(--steel-3); border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 13px; color: var(--muted); }
 .icon-btn:hover { color: var(--fg); }
-
 .grid { display: grid; grid-template-columns: minmax(340px, .85fr) minmax(0, 1.15fr); gap: 18px; align-items: start; }
 .left { display: grid; gap: 14px; min-width: 0; }
 @media (min-width: 821px) {

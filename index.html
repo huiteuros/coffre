@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f1214">
 <title>Chambre Forte</title>
+<meta name="description" content="Jeu incrémental de casse de coffres : tourne le cadran, ouvre des coffres de plus en plus blindés et réinvestis le butin.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Chambre Forte">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
@@ -18,8 +26,7 @@
     <div class="wallet">
       <div class="chip"><small>Or</small><b id="gold">0</b></div>
       <div class="chip lingot"><small>Lingots</small><b id="lingots">0</b></div>
-      <button class="icon-btn" id="mute" type="button" aria-pressed="false">Son : oui</button>
-    </div>
+      <button class="icon-btn" id="mute" type="button" aria-pressed="false">Son : oui</button>    </div>
   </header>
 
   <div class="grid">
@@ -154,6 +161,10 @@
           <div>Cavales <b id="stRuns">0</b></div>
           <div>Lingots gagnés <b id="stEarned">0</b></div>
           <div>Bonus total <b id="stMult">×1</b></div>
+        </div>
+        <div id="installHelp" hidden>
+          <h3>Installer l’appli</h3>
+          <p class="lead">Sur iPhone ou iPad, dans Safari : touche le bouton <b>Partager</b>, puis <b>Sur l’écran d’accueil</b>. Chambre Forte s’ouvrira ensuite en plein écran, comme une appli.</p>
         </div>
         <h3>Compte</h3>
         <div id="account"><p class="lead">Recherche du serveur de sauvegarde…</p></div>

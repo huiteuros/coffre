@@ -1,5 +1,13 @@
 # Chambre Forte : règles Apache pour l'hébergement (OVH Web Cloud)
 
+# Appli installable : type du manifeste, et service worker toujours revérifié
+AddType application/manifest+json .webmanifest
+<IfModule mod_headers.c>
+  <Files "sw.js">
+    Header set Cache-Control "no-cache"
+  </Files>
+</IfModule>
+
 RewriteEngine On
 
 # Tout en HTTPS : les mots de passe et jetons ne doivent jamais circuler en clair

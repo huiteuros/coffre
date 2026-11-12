@@ -13,6 +13,7 @@ import {
 import { save, restore, offlineGain, syncUp, syncDown } from './save.js';
 import { probe } from './api.js';
 import { initAccount, renderAccount, refreshBoard, periodicSync } from './account.js';
+import { initInstall } from './install.js';
 
 // ---------- Construction de la page ----------
 buildDoor();
@@ -21,6 +22,7 @@ buildPerks(buyPerk);
 buildAch();
 buildChallenges({ onLaunch: launchChallenge, onAbandon: abandonChallenge, onCancel: cancelChallengeConfirm });
 initTabs();
+initInstall();
 window.addEventListener('resize', sizeFx);
 
 // ---------- Commandes ----------
