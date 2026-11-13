@@ -17,6 +17,17 @@ export const S = fresh();
 export function replaceState(obj = {}) {
   for (const k of Object.keys(S)) delete S[k];
   Object.assign(S, fresh(), obj);
+  normalizeMaps();
+}
+
+// Les tables clé → valeur doivent rester des objets. L'ancienne API renvoyait [] pour un objet vide :
+// dans un tableau, les clés ajoutées ensuite (défis, succès…) disparaissaient à la sauvegarde.
+const MAPS = ['owned', 'perks', 'ach', 'chal'];
+export function normalizeMaps() {
+  for (const k of MAPS) {
+    const v = S[k];
+    if (!v || typeof v !== 'object' || Array.isArray(v)) S[k] = Object.assign({}, v || {});
+  }
 }
 
 // État de la session, jamais sauvegardé

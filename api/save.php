@@ -12,12 +12,15 @@ if ($method === 'GET') {
     $st->execute([$player['id']]);
     $row = $st->fetch();
     respond(200, $row
-        ? ['state' => json_decode($row['state'], true), 'savedAt' => (int) $row['saved_at']]
+        ? ['state' => json_objects($row['state']), 'savedAt' => (int) $row['saved_at']]
         : ['state' => null, 'savedAt' => 0]);
 }
 
-$state = input()['state'] ?? null;
-if (!is_array($state) || !isset($state['saved'], $state['vault'], $state['owned']) || !is_numeric($state['saved'])) {
+// Deux lectures du même corps : en objets pour le stocker tel quel ({} reste {}), en tableau pour lire les champs
+$raw = input_raw();
+$stateObj = json_objects($raw)->state ?? null;
+$state = json_decode($raw, true)['state'] ?? null;
+if (!is_object($stateObj) || !is_array($state) || !isset($state['saved'], $state['vault'], $state['owned']) || !is_numeric($state['saved'])) {
     fail(422, 'Sauvegarde invalide.');
 }
 $savedAt = (int) $state['saved'];
@@ -35,13 +38,13 @@ if ($current && (int) $current['saved_at'] > $savedAt) {
     $pdo->rollBack();
     respond(409, [
         'error'   => 'Une sauvegarde plus récente existe sur le serveur.',
-        'state'   => json_decode($current['state'], true),
+        'state'   => json_objects($current['state']),
         'savedAt' => (int) $current['saved_at'],
     ]);
 }
 
 $values = [
-    json_encode($state, JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION),
+    json_encode($stateObj, JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION),
     $savedAt, $bestVault, (int) $num('lingotsEarned'), $num('totalGold'), (int) $num('runs'),
 ];
 if ($current) {

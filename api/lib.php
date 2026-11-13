@@ -58,15 +58,29 @@ function require_method(string ...$methods): string
     return $m;
 }
 
-function input(): array
+function input_raw(): string
 {
     global $CONFIG;
     $raw = file_get_contents('php://input', false, null, 0, $CONFIG['max_state_bytes'] + 1000);
     if ($raw === false || $raw === '') fail(400, 'Corps de requête vide.');
     if (strlen($raw) > $CONFIG['max_state_bytes']) fail(413, 'Données trop volumineuses.');
-    $data = json_decode($raw, true);
+    return $raw;
+}
+
+function input(): array
+{
+    $data = json_decode(input_raw(), true);
     if (!is_array($data)) fail(400, 'JSON invalide.');
     return $data;
+}
+
+/**
+ * Décode du JSON en gardant les objets vides : en tableaux associatifs, PHP confond {} et []
+ * et le jeu recevait alors des tableaux à la place de ses objets (défis, succès… perdus).
+ */
+function json_objects(string $json): mixed
+{
+    return json_decode($json, false);
 }
 
 // ---------- Authentification par jeton ----------
